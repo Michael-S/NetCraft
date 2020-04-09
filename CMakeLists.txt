@@ -14,6 +14,7 @@ if (EMSCRIPTEN)
         deps/tinycthread/tinycthread.c)
     # Generate HTML file wrapper in addition to .js
     set(CMAKE_EXECUTABLE_SUFFIX ".html")
+add_definitions(-O3)
 else ()
     FILE(COPY textures DESTINATION .)
     FILE(COPY shaders DESTINATION .)
@@ -26,9 +27,10 @@ else ()
         deps/noise/noise.c
         deps/sqlite/sqlite3.c
         deps/tinycthread/tinycthread.c)
-endif ()
 
 add_definitions(-std=c99 -O3)
+endif ()
+
 add_definitions(-DLODEPNG_NO_COMPILE_ZLIB)
 
 set_property(SOURCE ${SOURCE_FILES} PROPERTY COMPILE_FLAGS "-Wall -Wextra -pedantic -Wno-unused-parameter -Wno-missing-field-initializers -Wno-sign-compare")
