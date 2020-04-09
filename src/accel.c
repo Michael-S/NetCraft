@@ -12,9 +12,10 @@ static EM_BOOL on_devicemotion(int eventtype, const EmscriptenDeviceMotionEvent 
 
     return EM_TRUE;
 }
-
+//#define NULL (void*)0
 void init_accel_callbacks(void) {
-    emscripten_set_devicemotion_callback(NULL, EM_TRUE, on_devicemotion);
+    emscripten_set_devicemotion_callback((void*)0, EM_TRUE, on_devicemotion);
+    //emscripten_set_devicemotion_callback(NULL, EM_TRUE, on_devicemotion);
 }
 #endif
 
