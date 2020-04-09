@@ -44,6 +44,9 @@ See below to run from source.
 ### Web builds
 
 To build for the web, compiling to JavaScript, first install [Emscripten](http://emscripten.org).
+
+Define an environment variable EMSCRIPTEN pointing to the directory of your Emscripten install.
+
 The EM SDK is the easiest to install, but to get my patch fixes you can either build from source
 using this branch: https://github.com/satoshinm/emscripten/commits/netcraft, or alternatively
 install 1.37.12 from the SDK and apply a patch:
@@ -55,6 +58,7 @@ Once your Emscripten environment is setup, then run:
     git clone https://github.com/satoshinm/NetCraft.git
     cd NetCraft
     mkdir build
+    cd build
     cmake -DCMAKE_TOOLCHAIN_FILE=$EMSCRIPTEN/cmake/Modules/Platform/Emscripten.cmake ..
     make
 
@@ -70,6 +74,7 @@ The default emscripten build configuration is unoptimized, for ease of developme
 can optimize using `-DCMAKE_BUILD_TYPE=Release` to cmake, for example:
 
     mkdir release-build-js
+    cd release-build-js
     cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=$EMSCRIPTEN/cmake/Modules/Platform/Emscripten.cmake ..
     make
 
@@ -87,6 +92,7 @@ Finally to enable the use of [WebAssembly](http://webassembly.org) (through
 emscripten's `-s WASM` flag to emcc), pass `-DWASM=1` to cmake:
 
     mkdir wasm-build
+    cd wasm-build
     cmake -DWASM=1 -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=$EMSCRIPTEN/cmake/Modules/Platform/Emscripten.cmake ..
     make
 
