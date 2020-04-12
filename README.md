@@ -93,7 +93,8 @@ emscripten's `-s WASM` flag to emcc), pass `-DWASM=1` to cmake:
 
     mkdir wasm-build
     cd wasm-build
-    cmake -DWASM=1 -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=$EMSCRIPTEN/cmake/Modules/Platform/Emscripten.cmake ..
+    //cmake -DWASM=1 -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=$EMSCRIPTEN/cmake/Modules/Platform/Emscripten.cmake ..
+    cmake -DWASM=1 -DCMAKE_TOOLCHAIN_FILE=$EMSCRIPTEN/cmake/Modules/Platform/Emscripten.cmake ..
     make
 
 This creates a binary file `craft.wasm` with the bulk of the application code,
