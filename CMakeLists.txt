@@ -15,8 +15,8 @@ if (EMSCRIPTEN)
     # Generate HTML file wrapper in addition to .js
     set(CMAKE_EXECUTABLE_SUFFIX ".html")
     #having problems, adding debug info
-    add_definitions(-g)
-    #add_definitions(-O3)
+    #add_definitions(-g)
+    add_definitions(-O3)
 else ()
     FILE(COPY textures DESTINATION .)
     FILE(COPY shaders DESTINATION .)
@@ -64,6 +64,9 @@ if (EMSCRIPTEN)
     # C functions callable from JavaScript
     set_property(TARGET craft APPEND_STRING PROPERTY LINK_FLAGS " -s EXPORTED_FUNCTIONS=\"['_main','_is_typing']\"")
 
+    # Additional C functions callable
+    set_property(TARGET craft APPEND_STRING PROPERTY LINK_FLAGS " -s EXTRA_EXPORTED_RUNTIME_METHODS=\"['cwrap']\"")
+
     set_property(TARGET craft APPEND_STRING PROPERTY LINK_FLAGS " --memory-init-file=0")
 
     if (CMAKE_BUILD_TYPE MATCHES "Release")
@@ -79,7 +82,7 @@ if (EMSCRIPTEN)
 
     if (WASM)
         add_definitions(-DBUILD_WASM)
-        set_property(TARGET craft APPEND_STRING PROPERTY LINK_FLAGS " -s WASM=1 -s EXTRA_EXPORTED_RUNTIME_METHODS=['cwrap']")
+        set_property(TARGET craft APPEND_STRING PROPERTY LINK_FLAGS " -s WASM=1")
         set_target_properties(craft PROPERTIES OUTPUT_NAME "craftw")
     endif ()
 endif ()
