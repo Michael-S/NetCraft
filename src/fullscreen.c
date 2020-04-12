@@ -31,7 +31,9 @@ static EM_BOOL on_canvassize_changed(int eventType, const void *reserved, void *
     emscripten_get_canvas_size(&w, &h, &isFullscreen);
 
     double cssW, cssH;
-    emscripten_get_element_css_size(0, &cssW, &cssH);
+    // using 0 for a default target is no longer recommended
+    //emscripten_get_element_css_size(0, &cssW, &cssH);
+    emscripten_get_element_css_size("#window", &cssW, &cssH);
 
     glfwSetWindowSize(window, w, h);
 
@@ -192,7 +194,7 @@ void init_fullscreen_monitor_dimensions(GLFWwindow *w) {
     fullscreen_height /= scale;
 #else
     maximize_canvas();
-    emscripten_set_fullscreenchange_callback(NULL, NULL, EM_TRUE, fullscreen_change_callback);
+    emscripten_set_fullscreenchange_callback("#window", NULL, EM_TRUE, fullscreen_change_callback);
 #endif
 }
 
